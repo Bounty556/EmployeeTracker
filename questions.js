@@ -44,7 +44,8 @@ const addDeptQuestions = [
     {
         type: 'input',
         name: 'deptName',
-        message: 'What is the name of the department you would like to add?'
+        message: 'What is the name of the department you would like to add?',
+        validate: validateText
     }
 ];
 
@@ -52,12 +53,14 @@ const addRoleQuestions = [
     {
         type: 'input',
         name: 'roleName',
-        message: 'What is the name of the role you would like to add?'
+        message: 'What is the name of the role you would like to add?',
+        validate: validateText
     },
     {
         type: 'input',
         name: 'salary',
-        message: 'What is this role\'s salary?'
+        message: 'What is this role\'s salary?',
+        validate: validateNumber
     },
     {
         type: 'list',
@@ -70,12 +73,14 @@ const addEmployeeQuestions = [
     {
         type: 'input',
         name: 'employeeFirst',
-        message: 'What is the first name of the Employee'
+        message: 'What is the first name of the Employee',
+        validate: validateText
     },
     {
         type: 'input',
         name: 'employeeLast',
-        message: 'What is the last name of the Employee'
+        message: 'What is the last name of the Employee',
+        validate: validateText
     },
     {
         type: 'list',
@@ -246,6 +251,14 @@ function getUpdateEmployeeRoleQuestions(connection) {
             });
         });
     });
+}
+
+function validateText(text) {
+    return /^[ a-zA-Z]+$/.test(text);
+}
+
+function validateNumber(number) {
+    return /^\d+$/.test(number);
 }
 
 module.exports = {

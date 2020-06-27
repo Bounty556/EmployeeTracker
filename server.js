@@ -151,19 +151,6 @@ function insertIntoTable(table, valuesObj) {
     });
 }
 
-function selectWhere(table, condition) {
-    const query = `SELECT * FROM ${table} t1 WHERE ${condition}`;
-    connection.query(query, (err, results) => {
-        if (err) {
-            console.log(err);
-            connection.end();
-        } else {
-            console.log(results);
-            start();
-        }
-    });
-}
-
 function updateWhere(table, value, condition) {
     const query = `UPDATE ${table} t1 SET ${value} WHERE ${condition}`;
     connection.query(query, (err, results) => {
