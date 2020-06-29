@@ -89,7 +89,7 @@ function addEmployee() {
 }
 
 function viewAllEmployees() {
-    const query = 'SELECT t1.id, t1.first_name, t1.last_name, roles.title, departments.name AS department, roles.salary, t2.first_name || " " || t2.last_name AS manager ' + 
+    const query = 'SELECT t1.id, t1.first_name, t1.last_name, roles.title, departments.name AS department, roles.salary, CONCAT(t2.first_name, \' \', t2.last_name) AS manager ' + 
     'FROM employees t1 LEFT JOIN employees t2 ON t1.manager_id = t2.id LEFT JOIN roles ON t1.role_id = roles.id LEFT JOIN departments ON roles.department_id = departments.id';
 
     runQuery(query);
@@ -99,7 +99,7 @@ function viewEmployeesByDepartment() {
     questions.getViewByDepartmentQuestions(connection).then(prompts => {
         if (prompts[0].choices) {
             inquirer.prompt(prompts).then(answers => {
-                const query = 'SELECT t1.id, t1.first_name, t1.last_name, roles.title, departments.name AS department, roles.salary, t2.first_name || " " || t2.last_name AS manager ' + 
+                const query = 'SELECT t1.id, t1.first_name, t1.last_name, roles.title, departments.name AS department, roles.salary, CONCAT(t2.first_name, \' \', t2.last_name) AS manager ' + 
                 'FROM employees t1 LEFT JOIN employees t2 ON t1.manager_id = t2.id LEFT JOIN roles ON t1.role_id = roles.id INNER JOIN departments ON roles.department_id = departments.id ' + 
                 'WHERE departments.id = ' + answers.dept;
 
@@ -116,7 +116,7 @@ function viewEmployeesByRole() {
     questions.getViewByRoleQuestions(connection).then(prompts => {
         if (prompts[0].choices) {
             inquirer.prompt(prompts).then(answers => {
-                const query = 'SELECT t1.id, t1.first_name, t1.last_name, roles.title, departments.name AS department, roles.salary, t2.first_name || " " || t2.last_name AS manager ' + 
+                const query = 'SELECT t1.id, t1.first_name, t1.last_name, roles.title, departments.name AS department, roles.salary, CONCAT(t2.first_name, \' \', t2.last_name) AS manager ' + 
                 'FROM employees t1 LEFT JOIN employees t2 ON t1.manager_id = t2.id LEFT JOIN roles ON t1.role_id = roles.id INNER JOIN departments ON roles.department_id = departments.id ' + 
                 'WHERE roles.id = ' + answers.role;
 
